@@ -1,8 +1,12 @@
 #!/bin/bash
 set -e
+
 AIRPAL_HOME=/opt/airpal
-#PRESTO_COORDINATOR=http://localhost:8080
-PRESTO_COORDINATOR=http://presto:${PRESTO_PORT_8080_TCP_PORT}
+
+if [ -z "$PRESTO_COORDINATOR" ]; then
+  PRESTO_COORDINATOR=http://localhost:8080
+fi
+
 exec java -server \
      -Duser.timezone=UTC \
      -Ddw.prestoCoordinator=${PRESTO_COORDINATOR} \
